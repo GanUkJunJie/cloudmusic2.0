@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace='com.example.cloudmusic.dao.UserBaseDao'>
+    <resultMap id="BaseResultMap" type="com.example.cloudmusic.entity.UserBase">
+        <id column="tel" jdbcType="VARCHAR" property="tel" />
+        <result column="vip" jdbcType="VARCHAR" property="vip" />
+        <result column="level" jdbcType="INTEGER" property="level" />
+        <result column="state" jdbcType="INTEGER" property="state" />
+        <result column="focus" jdbcType="INTEGER" property="focus" />
+        <result column="fans" jdbcType="INTEGER" property="fans" />
+    </resultMap>
+
+    <!--获取用户动态信息 -->
+    <select id="getUserBase" parameterType="java.lang.String"
+            resultMap="BaseResultMap">
+		select tel,vip,level,state,focus,fans from userBase where tel = #{tel}
+	</select>
+
+
+</mapper>
