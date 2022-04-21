@@ -13,9 +13,11 @@ Vue.use(ElementUI)
 import '@/permission';
 import '@/styles/index.scss';
 import { postRequest } from '@/utils/request';
+import { postService } from '@/utils/service';
 import { undeveloped } from '@/utils/tools';
 
 Vue.prototype.$postRequest = postRequest
+Vue.prototype.$postService = postService
 Vue.prototype.$undeveloped = undeveloped
 
 Vue.config.productionTip = false
