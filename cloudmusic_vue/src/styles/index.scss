@@ -1,0 +1,71 @@
+@import url("//at.alicdn.com/t/font_3234534_98rl6uvukjp.css");
+@import './element.scss';
+@import './mouseStyle.scss';
+@import './navigation.scss';
+@import './original.scss';
+
+#app {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: url(../assets/background/background.jpg) no-repeat;
+    background-size: cover;
+    background-position: center center;
+    display: flex;//整个播放器居中
+    
+}
+
+#layout {
+    position: relative;
+    margin: auto;
+    width: 1280px;
+}
+
+#header {
+    padding: 0 10px;
+    background-color: #FD544E;
+    display: flex;
+}
+#aside {
+    width: 201px !important;
+    background-color: #FFFFFF;
+    height: 670px;
+    border-right: solid 1px #DDDEE0;
+}
+#main {
+    background-color: #FFFFFF;
+    height: 670px;
+    padding: 0 30px;
+}
+#footer {
+    height: 70px !important;
+    border-top: 1px solid #DDDEE0;
+    padding: 0 10px;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+}
+
+body {
+    .lightBlackTag {
+        color: #373737;
+        &:hover {
+            color: #000000;
+        }
+    }
+    .lightBlueTag {
+        color: #507DAF;
+        &:hover {
+            color: #0B58B0;
+        }
+    }
+    .marginTop {
+        margin-top: 30px;
+    }
+}
+
+::-webkit-scrollbar { 
+    width: 0 !important 
+}

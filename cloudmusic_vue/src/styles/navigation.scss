@@ -1,0 +1,84 @@
+body {
+    .sidebarItem {
+        .el-menu{
+            padding-top: 5px;
+            border-right: 0;
+        }
+        .el-menu-item {
+            padding: 5px !important;
+            height: 40px;
+            &.is-active {
+                .button{
+                    background-color: #F6F6F7;
+                    font-size: 18px;
+                    font-weight: bold;
+                }
+            }
+            .button {
+                width: 98%;
+                border-radius: 3px;
+                line-height: 36px;
+                span, i{
+                    margin-left: 10px;
+                    color: #373737;
+                }
+            }
+            .button:hover{
+                background-color: #F6F6F7;
+                span {
+                    color: #000000;
+                }
+            }
+        }
+        .levelTwo{
+            margin-top: 10px;
+            .el-menu-item{
+                height: 40px;
+                &.is-active {
+                    .button{
+                        font-size: 14px;
+                        font-weight: normal;
+                    }
+                }
+            }
+            .el-submenu__title {
+                height: 30px;
+                line-height: 30px;
+                color: #9F9F9F;
+                padding: 0 15px !important;
+                background-color: #FFFFFF;
+            }
+        }
+        .keepOpen{
+            .el-menu {
+                display: inline !important;
+            }
+            .el-submenu__title {
+                i{ display: none; }
+            }
+        }
+    }
+    .el-menu {
+        border-bottom: 0 !important;
+    }
+    .topMenu {
+        .el-menu-item {
+            font-size: 18px;
+            &.is-active {
+                font-size: 22px;
+            }
+        }
+    }
+    .horizontalMenu{
+        .el-menu-item {
+            color: #373737;
+            &.is-active {
+                font-weight: bold;
+                border-bottom: 3px solid #EC4141;
+            }
+            &:hover {
+                color: #000000 !important;
+            }
+        }
+    }
+}
