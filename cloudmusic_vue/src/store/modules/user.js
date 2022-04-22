@@ -1,9 +1,10 @@
 import createRouterMap from '@/router/generate-routes';
 const state = {
     user: {
-        id: 1,
-        name: '未来',
-        avatar: '../../assets/img/user.jpg'
+        id: null,
+        name: null,
+        avatar: null,
+        tel: null,
     },
     menu: [],
 }
@@ -19,6 +20,16 @@ const mutations = {
 
 const actions = {
     getInfo({ commit, state}) {
+        const user =  window.sessionStorage.getItem("tel")
+        console.log(user);
+        if (user) {
+            commit('SET_USER',{
+                id: 1,
+                name: '未来',
+                avatar: null,
+                tel: user,
+            })
+        }
         var routerList = []
         routerList = createRouterMap([])
         commit('SET_MENU',routerList)
