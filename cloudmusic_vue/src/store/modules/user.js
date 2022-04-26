@@ -1,7 +1,11 @@
 import createRouterMap from '@/router/generate-routes';
-// import { getInfo } from '@/api/user';
 const state = {
-    user: {},
+    user: {
+        id: null,
+        name: null,
+        avatar: null,
+        tel: null,
+    },
     menu: [],
 }
 
@@ -16,26 +20,19 @@ const mutations = {
 
 const actions = {
     getInfo({ commit, state}) {
-        var routerList = []
-        // return new Promise((resolve, reject) => {
-            // 数据库读取路由
-            // getInfo(state.token).then( res => {
-            //     const { result } = res;
-            //     routerList = createRouterMap((result && result.menuList) || [])
-
-            routerList = createRouterMap([])
-            commit('SET_MENU',routerList)
-            commit('SET_USER', {
+        const user =  window.sessionStorage.getItem("tel")
+        console.log(user);
+        if (user) {
+            commit('SET_USER',{
                 id: 1,
-                name: 'K',
-                avatar: '../../assets/img/user.jpg'
-            });
-            // resolve(result);
-
-            // }).catch (err => {
-            //     reject(err)
-            // })
-        // })
+                name: '未来',
+                avatar: null,
+                tel: user,
+            })
+        }
+        var routerList = []
+        routerList = createRouterMap([])
+        commit('SET_MENU',routerList)
     }
 }
 

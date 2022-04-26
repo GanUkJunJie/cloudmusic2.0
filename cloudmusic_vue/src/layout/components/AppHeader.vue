@@ -15,7 +15,7 @@
     </div>
     <div class="right">
       <div @click="handleUser">
-        <el-avatar class="user" :size="35" :src="userCover"> 
+        <el-avatar class="user" :size="35" :src="user.avatar"> 
           <i class="iconfont icon-login"></i>
         </el-avatar>
         <span class="text">{{user.name || '未登录'}}</span>
@@ -33,7 +33,7 @@
         <i class="iconfont icon-guanbi"></i>
       </div>
     </div>
-    <LoginBox v-if="login" class="login"/>
+    <LoginBox v-if="login" @changeLogin="changeLogin" class="login"/>
   </div>
 </template>
 <script>
@@ -44,7 +44,6 @@ export default {
     return {
       searchInput: '',
       login: false,
-      userCover: require('@/assets/img/user.jpg'),
     };
   },
   computed: {
@@ -68,6 +67,9 @@ export default {
         return;
       }
       this.login = !this.login
+    },
+    changeLogin(val){
+      this.login = val
     }
   },
 }

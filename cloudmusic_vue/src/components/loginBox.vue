@@ -27,7 +27,9 @@ export default {
     },
     methods: {
         logging(){
-            
+            window.sessionStorage.setItem("tel", this.tel);
+            this.$store.dispatch('user/getInfo')
+            this.$emit('changeLogin', false);
         },
         register(){
             
