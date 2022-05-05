@@ -27,4 +27,10 @@ public class UserInfoController {
         service.updateUserInfo(uuid,name,sex,intro,birthYear,birthMonth,birthDay,address,avatar);
         return new ApiResult("200","修改成功",null).success();
     }
+
+    @GetMapping("/getUserBase")
+    @ResponseBody
+    public ApiResult getUserBase(@RequestParam("uuid") String uuid) {
+        return new ApiResult("200","",service.getUserBase(uuid)).success();
+    }
 }

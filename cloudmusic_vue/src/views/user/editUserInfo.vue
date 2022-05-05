@@ -110,6 +110,7 @@ export default {
                 ...this.base
             }).then(res => {
                 this.$message({message: res.message,type: 'success'});
+                this.$store.dispatch('user/getInfo')
             })
         },
         cancel(){

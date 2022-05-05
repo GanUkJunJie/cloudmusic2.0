@@ -14,7 +14,7 @@ export function login(data){
 
 //用户基本信息
 export function userBase(data){
-    return postService('/userBase/getUserBase', data, showErrMsg)
+    return postService('/userInfo/getUserBase', data, showErrMsg)
 }
 
 //用户动态信息
