@@ -12,7 +12,7 @@ public class UserBaseServiceImpl implements UserBaseService {
     UserBaseDao userBaseDao;
 
     @Override
-    public UserBase getUserBase(String tel) {
-        return userBaseDao.getUserBase(tel);
+    public UserBase getUserBase(String uuid) {
+        return userBaseDao.getUserBase(uuid);
     }
 }

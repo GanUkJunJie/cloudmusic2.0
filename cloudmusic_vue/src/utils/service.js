@@ -40,7 +40,7 @@ service.interceptors.response.use(
 export const postService = (url, data, {showErrMsg = false} = {}) => {
     return service({
         url: url,
-        method: 'post',
+        method: 'get',
         params: data,
     }).then(res => {
         if (res.code == '200') {

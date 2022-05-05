@@ -1,11 +1,7 @@
 import createRouterMap from '@/router/generate-routes';
+import { userBase } from '@/api/service';
 const state = {
-    user: {
-        id: null,
-        name: null,
-        avatar: null,
-        tel: null,
-    },
+    user: {},
     menu: [],
 }
 
@@ -20,14 +16,12 @@ const mutations = {
 
 const actions = {
     getInfo({ commit, state}) {
-        const user =  window.sessionStorage.getItem("tel")
-        console.log(user);
-        if (user) {
-            commit('SET_USER',{
-                id: 1,
-                name: '未来',
-                avatar: null,
-                tel: user,
+        const uuid =  window.sessionStorage.getItem("uuid")
+        if (uuid) {
+            userBase({
+                uuid: uuid
+            }).then(res => {
+                commit('SET_USER',res.result)
             })
         }
         var routerList = []

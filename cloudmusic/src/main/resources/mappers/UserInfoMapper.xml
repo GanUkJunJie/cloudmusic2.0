@@ -4,29 +4,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace='com.example.cloudmusic.dao.UserInfoDao'>
     <resultMap id="BaseResultMap" type="com.example.cloudmusic.entity.UserInfo">
-        <id column="tel" jdbcType="VARCHAR" property="tel" />
+        <id column="uuid" jdbcType="VARCHAR" property="uuid" />
+        <result column="tel" jdbcType="VARCHAR" property="tel" />
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="sex" jdbcType="VARCHAR" property="sex" />
         <result column="intro" jdbcType="VARCHAR" property="intro" />
-        <result column="birth" jdbcType="VARCHAR" property="birth" />
+        <result column="birthYear" jdbcType="INTEGER" property="birthYear" />
+        <result column="birthMonth" jdbcType="INTEGER" property="birthMonth" />
+        <result column="birthDay" jdbcType="INTEGER" property="birthDay" />
         <result column="address" jdbcType="VARCHAR" property="address" />
-        <result column="regPhoto" jdbcType="TIMESTAMP" property="regPhoto" />
+        <result column="avatar" jdbcType="TIMESTAMP" property="avatar" />
     </resultMap>
 
     <!-- 读取全部信息 -->
     <select id="getUserInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
-		select tel,name,sex,intro,birth,address,regPhoto from userInfo where tel = #{tel}
-	</select>
-
-    <!-- 读取header信息 -->
-    <select id="getHeaderInfo" parameterType="java.lang.String" resultMap="BaseResultMap">
-		select name,regPhoto from userInfo where tel = #{tel}
+		select uuid,tel,name,sex,intro,birthYear,birthMonth,birthDay,address,avatar
+		    from userInfo where uuid = #{uuid}
 	</select>
 
     <!-- 修改信息 -->
     <update id="updateUserInfo">
 		update userInfo set name=#{name},sex=#{sex},intro=#{intro},
-		birth=#{birth},address=#{address},regPhoto=#{regPhoto} where tel = #{tel}
+		birthYear=#{birthYear},birthMonth=#{birthMonth},birthDay=#{birthDay},
+		address=#{address},avatar=#{avatar} where uuid = #{uuid}
 	</update>
 
 </mapper>

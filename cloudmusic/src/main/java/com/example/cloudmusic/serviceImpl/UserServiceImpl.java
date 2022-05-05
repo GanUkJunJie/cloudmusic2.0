@@ -16,12 +16,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void register(String tel, String pwd) {
-        userDao.register(tel,pwd);
+    public void register(String uuid,String tel, String password) {
+        userDao.register(uuid,tel,password);
     }
 
     @Override
-    public Boolean isExist(String tel) {
+    public Integer isExist(String tel) {
         return userDao.isExist(tel);
+    }
+
+    @Override
+    public String getUUID(String tel) {
+        return userDao.getUUID(tel);
     }
 }

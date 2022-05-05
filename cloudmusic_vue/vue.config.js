@@ -20,7 +20,7 @@ module.exports = {
             '/service': {
                 target: 'http://localhost:8081/',
                 pathRewrite: {
-                    '^/back': ''
+                    '^/service': ''
                 },
                 changeOrigin: true,
                 ws: true,

@@ -12,19 +12,19 @@
                     </el-form-item>
                     <el-form-item label="性别：">
                         <el-radio-group v-model="base.sex">
-                            <el-radio :label="1">男</el-radio>
-                            <el-radio :label="0">女</el-radio>
+                            <el-radio label="1">男</el-radio>
+                            <el-radio label="0">女</el-radio>
                         </el-radio-group>
                     </el-form-item>
                     <el-form-item label="生日：">
                         <el-select class="birth" v-model="base.birthYear" placeholder="">
                             <el-option v-for="item in year" :key="item" :label="item" :value="item"></el-option>
                         </el-select>
-                        <el-select class="birth" v-model="base.month" placeholder="">
-                            <el-option v-for="item in month" :key="item" :label="item" :value="item"></el-option>
+                        <el-select class="birth" v-model="base.birthMonth" placeholder="">
+                            <el-option v-for="item in month" :key="item" :label="item+'月'" :value="item"></el-option>
                         </el-select>
-                        <el-select class="birth" v-model="base.day" placeholder="">
-                            <el-option v-for="item in day" :key="item" :label="item" :value="item"></el-option>
+                        <el-select class="birth" v-model="base.birthDay" placeholder="">
+                            <el-option v-for="item in currentDay" :key="item" :label="item+'日'" :value="item"></el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item label="地址：">
@@ -49,12 +49,14 @@
 </template>
 <script>
 import {year, month, day} from '@/common/date.js';
+import { userInfo, updateUserInfo } from '@/api/service';
 export default {
-    name:'UpdateUerInfo',
     data() {
         const validatorName = (rule,value,callback) => {
             if (value === '') {
                 callback(new Error('请输入昵称'))
+            } else {
+                callback()
             }
         }
         return {
@@ -64,11 +66,12 @@ export default {
             base:{
                 name:'',
                 intro: '',
-                sex: 1,
+                sex: '',
                 birthYear: '',
                 birthMonth: '',
                 birthDay: '',
                 address: '',
+                avatar: '',
             },
             rules: {
                 name: [
@@ -77,12 +80,36 @@ export default {
             }
         }
     },
+    mounted() {
+        this.getUserInfo()
+    },
+    computed: {
+        currentDay(){
+            const days = new Date(this.base.birthYear,this.base.birthMonth,0).getDate()
+            return this.day.slice(0,days);
+        }
+    },
     methods: {
+        getUserInfo(){
+            userInfo({
+                uuid: this.$route.query.uuid
+            }).then(res => {
+                this.base = Object.assign({},res.result)
+            })
+        },
         submit(){
-            this.$refs['userInfo'].validate((valid) => {
+            this.$refs.userInfo.validate((valid) => {
                 if (valid) {
-                    
+                    this.save()
                 }
+            })
+        },
+        save(){
+            updateUserInfo({
+                uuid: this.$route.query.uuid,
+                ...this.base
+            }).then(res => {
+                this.$message({message: res.message,type: 'success'});
             })
         },
         cancel(){

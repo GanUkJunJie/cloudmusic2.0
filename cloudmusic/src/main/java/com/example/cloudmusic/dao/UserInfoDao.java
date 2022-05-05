@@ -10,12 +10,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserInfoDao {
 
-    UserInfo getUserInfo(String tel);
+    UserInfo getUserInfo(String uuid);
 
-    UserInfo getHeaderInfo(String tel);
-
-
-    void updateUserInfo(@Param("tel") String tel,@Param("name")  String name,@Param("sex") String sex,
-                        @Param("intro") String intro,@Param("birth") String birth,
-                        @Param("address") String address,@Param("regPhoto") String regPhoto);
+    void updateUserInfo(@Param("uuid") String uuid,@Param("name")  String name,@Param("sex") String sex,
+                        @Param("intro") String intro,@Param("birthYear") Integer birthYear,
+                        @Param("birthMonth") Integer birthMonth,@Param("birthDay") Integer birthDay,
+                        @Param("address") String address,@Param("avatar") String regPhoto);
 }

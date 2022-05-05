@@ -1,13 +1,24 @@
 package com.example.cloudmusic.entity;
 
 public class UserInfo {
+    private String uuid;
     private String tel;
     private String name;
     private String sex;
     private String intro;
-    private String birth;
+    private Integer birthYear;
+    private Integer birthMonth;
+    private Integer birthDay;
     private String address;
-    private String regPhoto;
+    private String avatar;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public String getTel() {
         return tel;
@@ -41,12 +52,28 @@ public class UserInfo {
         this.intro = intro;
     }
 
-    public String getBirth() {
-        return birth;
+    public Integer getBirthYear() {
+        return birthYear;
     }
 
-    public void setBirth(String birth) {
-        this.birth = birth;
+    public void setBirthYear(Integer birthYear) {
+        this.birthYear = birthYear;
+    }
+
+    public Integer getBirthMonth() {
+        return birthMonth;
+    }
+
+    public void setBirthMonth(Integer birthMonth) {
+        this.birthMonth = birthMonth;
+    }
+
+    public Integer getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(Integer birthDay) {
+        this.birthDay = birthDay;
     }
 
     public String getAddress() {
@@ -57,12 +84,12 @@ public class UserInfo {
         this.address = address;
     }
 
-    public String getRegPhoto() {
-        return regPhoto;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setRegPhoto(String regPhoto) {
-        this.regPhoto = regPhoto;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }
 

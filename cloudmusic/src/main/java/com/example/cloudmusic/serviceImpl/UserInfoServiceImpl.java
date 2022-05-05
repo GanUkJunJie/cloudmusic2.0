@@ -11,16 +11,13 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Autowired
     UserInfoDao userInfoDao;
 
-    public UserInfo getUserInfo(String tel) {
-        return userInfoDao.getUserInfo(tel);
+    public UserInfo getUserInfo(String uuid) {
+        return userInfoDao.getUserInfo(uuid);
     }
 
-    public  UserInfo getHeaderInfo(String tel){
-        return userInfoDao.getHeaderInfo(tel);
-    }
-
-    public void updateUserInfo(String tel, String name, String sex,
-                               String intro, String birth, String address, String regPhoto){
-        userInfoDao.updateUserInfo(tel,name,sex,intro,birth,address,regPhoto);
+    public void updateUserInfo(String uuid, String name, String sex,
+        String intro,Integer birthYear,Integer birthMonth,
+        Integer birthDay, String address, String avatar){
+        userInfoDao.updateUserInfo(uuid,name,sex,intro,birthYear,birthMonth,birthDay,address,avatar);
     }
 }

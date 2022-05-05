@@ -1,5 +1,4 @@
 package com.example.cloudmusic.dao;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -12,8 +11,11 @@ public interface UserDao {
     String login(@Param("tel")String tel);
 
     //注册
-    void register(@Param("tel") String tel, @Param("pwd") String pwd);
+    void register(@Param("uuid") String uuid, @Param("tel") String tel, @Param("password") String password);
 
     //用户是否存在
-    Boolean isExist(@Param("tel") String tel);
+    Integer isExist(@Param("tel") String tel);
+
+    //获取用户uuid
+    String getUUID(@Param("tel") String tel);
 }

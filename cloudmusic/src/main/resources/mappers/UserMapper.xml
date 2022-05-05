@@ -3,20 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace='com.example.cloudmusic.dao.UserDao'>
-
     <!-- 登录 -->
     <select id="login" parameterType="java.lang.String" resultType="java.lang.String">
-		select pwd from users where tel = #{tel}
+		select password from users where tel = #{tel}
 	</select>
 
     <!-- 注册 -->
     <insert id="register" parameterType="java.lang.String">
-        insert into users (tel,pwd) value( #{tel}, #{pwd} )
+        insert into users (uuid,tel,password) value(#{uuid}, #{tel}, #{password} )
 	</insert>
 
     <!--用户是否存在-->
-    <select id="isExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
-		select pwd from users where tel = #{tel}
+    <select id="isExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from users where tel = #{tel}
 	</select>
 
+    <!--用户UUID-->
+    <select id="getUUID" parameterType="java.lang.String" resultType="java.lang.String">
+		select uuid from users where tel = #{tel}
+	</select>
 </mapper>

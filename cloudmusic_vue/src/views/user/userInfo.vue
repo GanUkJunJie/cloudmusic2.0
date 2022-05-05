@@ -2,14 +2,14 @@
     <div>
         <div class="userInfo">
             <div class="userCover">
-                <img src="@/assets/img/user.jpg">
+                <img :src="user.avatar">
             </div>
             <div class="info">
                 <div style="border-bottom: 1px solid #E5E5E5;width: 800px;">
-                    <div class="name">{{base.name}}</div>
+                    <div class="name">{{dynamic.name}}</div>
                     <div style="display: flex;align-items: center;margin-bottom: 10px;">
-                        <button class="level">Lv{{base.level}}</button>
-                        <i v-if="base.sex === 1" class="iconfont icon-male" style="background-color:#C0F3FF"></i>
+                        <button class="level">Lv{{dynamic.level}}</button>
+                        <i v-if="dynamic.sex === 1" class="iconfont icon-male" style="background-color:#C0F3FF"></i>
                         <i v-else class="iconfont icon-female" style="background-color:#FFCDE8"></i>
                         <button class="compile" @click="update">
                             <i class="iconfont icon-compile"></i>
@@ -19,13 +19,13 @@
                 </div>
                 <div class="states">
                     <div class="state">
-                        <div>{{base.state}}</div><div>动态</div>
+                        <div>{{dynamic.state}}</div><div>动态</div>
                     </div>
                     <div class="state">
-                        <div>{{base.focus}}</div><div>关注</div>
+                        <div>{{dynamic.focus}}</div><div>关注</div>
                     </div>
                     <div class="state">
-                        <div>{{base.fans}}</div><div>粉丝</div>
+                        <div>{{dynamic.fans}}</div><div>粉丝</div>
                     </div>
                 </div>
                 <div>
@@ -41,29 +41,42 @@
 </template>
 <script>
 import myMusic from './myMusic';
+import { userDynamic } from '@/api/service';
 export default {
     components: {
         myMusic,
     },
     data() {
         return {
-            base: {
-                level: 9,
-                state: 0,
-                focus: 0,
-                fans: 0,
-                sex: 1,
-            },
+            dynamic: {},
         };
     },
+    computed:{
+        uuid(){
+            return this.$route.query.uuid
+        },
+        user(){
+            return this.$store.getters.user
+        }
+    },
+    mounted() {
+        this.getUserDynamic()
+    },
     methods: {
+        getUserDynamic(){
+            userDynamic({
+                uuid: this.uuid,
+            }).then(res => {
+                this.dynamic = res.result
+            })
+        },
         update(){
             this.$router.push({ 
-            name: 'editUserInfo',
-            query: {
-                id: this.$route.query.id,
-            }
-        })
+                name: 'editUserInfo',
+                query: {
+                    uuid: this.uuid,
+                }
+            })
         }
     },
 }

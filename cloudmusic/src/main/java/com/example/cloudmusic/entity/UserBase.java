@@ -1,12 +1,17 @@
 package com.example.cloudmusic.entity;
 
 public class UserBase {
+    private String uuid;
     private String tel;
-    private String vip;
-    private int level;
-    private int state;
-    private int focus;
-    private int fans;
+    private String name;
+    private String avatar;
+
+    public UserBase(String uuid,String tel, String name, String avatar) {
+        this.uuid = uuid;
+        this.tel = tel;
+        this.name = name;
+        this.avatar = avatar;
+    }
 
     public String getTel() {
         return tel;
@@ -16,43 +21,27 @@ public class UserBase {
         this.tel = tel;
     }
 
-    public String getVip() {
-        return vip;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setVip(String vip) {
-        this.vip = vip;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
-    public Number getLevel() {
-        return level;
+    public String getName() {
+        return name;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getState() {
-        return state;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setState(int state) {
-        this.state = state;
-    }
-
-    public int getFocus() {
-        return focus;
-    }
-
-    public void setFocus(int focus) {
-        this.focus = focus;
-    }
-
-    public int getFans() {
-        return fans;
-    }
-
-    public void setFans(int fans) {
-        this.fans = fans;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

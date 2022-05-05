@@ -1,18 +1,18 @@
 package com.example.cloudmusic.controller;
 
-import com.example.cloudmusic.service.UserBaseService;
+import com.example.cloudmusic.service.UserDynamicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/userBase")
-public class UserBaseController {
+@RequestMapping("/userDynamic")
+public class UserDynamicController {
     @Autowired
-    private UserBaseService service;
+    private UserDynamicService service;
 
-    @GetMapping("/getUserBase")
+    @GetMapping("/getUserDynamic")
     @ResponseBody
     public ApiResult getUserBase(@RequestParam("uuid") String uuid) {
-        return new ApiResult("200","",service.getUserBase(uuid)).success();
+        return new ApiResult("200","",service.getUserDynamic(uuid)).success();
     }
 }

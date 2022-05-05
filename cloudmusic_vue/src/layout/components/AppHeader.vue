@@ -57,11 +57,11 @@ export default {
   },
   methods: {
     handleUser(){
-      if (this.user.id) {
+      if (this.user.uuid) {
         this.$router.push({ 
             name: 'userInfo',
             query: {
-                id: this.user.id,
+                uuid: this.user.uuid,
             }
         })
         return;

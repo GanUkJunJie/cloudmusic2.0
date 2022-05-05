@@ -1,8 +1,9 @@
 package com.example.cloudmusic.controller;
-
 import com.example.cloudmusic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
@@ -12,50 +13,46 @@ public class UserController {
     /**
      * 登录
      * @param tel
-     * @param pwd
+     * @param password
      * @return
      */
     @GetMapping("/login")
     @ResponseBody
-    public String login(@RequestParam("tel") String tel, @RequestParam("pwd") String pwd) {
+    public ApiResult login(@RequestParam("tel") String tel, @RequestParam("password") String password) {
         System.out.println("userName:"+tel);
-        System.out.println("pwd:"+pwd);
-        if (tel.length() ==11){
-            if (pwd.length()>0){
-                if (service.login(tel)==null){
-                    return "用户不存在！";
-                } else {
-                    if (service.login(tel).equals(pwd)){
-                        return tel;
-                    } else {
-                        return "密码错误";
-                    }
-                }
-            }else {
-                return "请输入密码";
+        System.out.println("password:"+password);
+        if (service.login(tel)==null){
+            return new ApiResult("0","用户不存在！",null).success();
+        } else {
+            if (service.login(tel).equals(password)){
+                return new ApiResult("200","登录成功！",service.getUUID(tel)).success();
+            } else {
+                return new ApiResult("0","密码错误！",null).success();
             }
-        }else {
-            return "请输入合法的手机号码";
         }
     }
+
+//    @GetMapping("/queryUser")
+//    @ResponseBody
+//    public ApiResult queryUser(@RequestParam("uuid") String uuid) {
+//        return new ApiResult("200","",service.queryUser(uuid)).success();
+//    }
 
     /**
      * 注册
      * @param tel
-     * @param pwd
+     * @param password
      * @return
      */
-    @GetMapping("/regist")
+    @GetMapping("/register")
     @ResponseBody
-    public String register(@RequestParam("tel") String tel, @RequestParam("pwd") String pwd) {
-        if (tel.length() == 11 && pwd.length() > 0) {
-            if (service.isExist(tel)!=null){
-                return "用户已存在！";
-            }else {
-                service.register(tel,pwd);
-                return "true";
-            }
+    public ApiResult register(@RequestParam("tel") String tel, @RequestParam("password") String password) {
+        if (service.isExist(tel) == 1){
+            return new ApiResult("0","用户已存在！",null).success();
+        }else {
+            String uuid = UUID.randomUUID().toString().replaceAll("-","");
+            service.register(uuid,tel,password);
+            return new ApiResult("200","注册成功！",null).success();
         }
-        return "请输入合法的手机号码和密码";
     }
 }
