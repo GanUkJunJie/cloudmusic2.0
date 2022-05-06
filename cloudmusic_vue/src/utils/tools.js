@@ -43,3 +43,8 @@ export function realFormatSecond(time) {
 export function undeveloped(){
     this.$message('此功能暂未开放');
 }
+
+//请先登录账户
+export function noUserLogin(){
+    this.$message('请先登录账户');
+}

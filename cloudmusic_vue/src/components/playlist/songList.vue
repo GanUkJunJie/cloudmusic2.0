@@ -23,8 +23,13 @@
             <el-table-column
                 label="操作"
                 width="70">
-                <template>
-                    <i class="iconfont icon-love" style="margin-right:10px"></i>
+                <template slot-scope="scope">
+                    <i v-if="likeId.indexOf(scope.row.id+'')>-1" class="iconfont icon-like" 
+                        style="margin-right:10px;color:red"
+                        @click="addLike(scope.row.id)"></i>
+                    <i v-else class="iconfont icon-love"
+                        style="margin-right:10px"
+                        @click="addLike(scope.row.id)"></i>
                     <i class="iconfont icon-download"></i>
                 </template>
             </el-table-column>
@@ -64,6 +69,7 @@
 </template>
 <script>
 import { songDetail } from '@/api/song';
+import { getLike,addLike } from '@/api/service';
 import { realFormatSecond } from '@/utils/tools';
 export default {
     props:{
@@ -88,12 +94,19 @@ export default {
         return {
             tableData: [], //歌单
             currentId: '',
+            likeId: [],
+        }
+    },
+    computed: {
+        uuid(){
+            return this.$store.getters.user.uuid
         }
     },
     watch: {
         trackIds:{
             handler(val,oldVal){
                 if (val) {
+                    this.getLike()
                     this.getSongDetail()
                 }
             }
@@ -105,6 +118,29 @@ export default {
         }
     },
     methods: {
+        getLike(){
+            if (!this.uuid) return
+            const songIds = this.trackIds.slice(0, this.songCount).toString()
+            getLike({
+                uuid: this.uuid,
+                songIds: songIds
+            }).then(res => {
+                this.likeId = res.result
+            })
+        },
+        addLike(songId){
+            if (!this.uuid) {
+                this.$noUserLogin()
+                return
+            }
+            addLike({
+                uuid: this.uuid,
+                songId: songId + '',
+            }).then(res => {
+                this.$message({message: res.message,type: 'success'});
+                this.getLike()
+            })
+        },
         getSongDetail(){
             songDetail({
                 ids: this.trackIds.slice(0, this.songCount).toString(),

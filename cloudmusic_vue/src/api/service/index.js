@@ -31,3 +31,22 @@ export function userInfo(data){
 export function updateUserInfo(data){
     return postService('/userInfo/updateUserInfo', data, showErrMsg)
 }
+
+//获取我喜欢的音乐id
+export function getLike(data){
+    return postService('/like/getLike', data, showErrMsg)
+}
+
+//喜欢音乐
+export function addLike(data){
+    return postService('/like/addLike', data, showErrMsg)
+}
+
+//我喜欢的音乐Count
+export function getCount(data){
+    return postService('/loveList/getCount', data, showErrMsg)
+}
+//我喜欢的音乐
+export function getLoveList(data){
+    return postService('/loveList/getLoveList', data, showErrMsg)
+}

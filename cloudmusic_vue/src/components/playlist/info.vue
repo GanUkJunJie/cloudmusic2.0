@@ -16,16 +16,18 @@
             <CloudButton :width="130" leftIcon="icon-download" text="下载全部"/>
         </div>
         <div class="describe">
-            标签：<span
+            <div v-if="playlist.tags">
+                标签：<span
                     v-for="(item, index) in this.playlist.tags"
                     :key="index">
                     <span class="lightBlueTag"> {{index + 1 === playlist.tags.length ? item : item + " / "}} </span>
                 </span>
+            </div>
             <div style="line-height:30px">
                 <span style="margin-right:10px">歌曲：{{ playlist.trackCount }}</span>
                 <span>播放：{{ getPlayCount(playlist.playCount) }}</span>
             </div>
-            <el-collapse>
+            <el-collapse v-if="describe">
                 <el-collapse-item :title="'简介：'+ introduceTitle">
                     <div 
                         v-for="(item, index) in describe" 

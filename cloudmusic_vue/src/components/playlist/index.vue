@@ -12,6 +12,7 @@ import PictureBox from '@/components/pictureBox';
 import Info from './info';
 import Tabs from './tabs';
 import { playlistDetail } from '@/api/discover-music/playlist';
+import { getLoveList } from '@/api/service';
 export default {
     components: {
         PictureBox,
@@ -32,18 +33,35 @@ export default {
             const arr = []
             if (!this.playlist.trackIds) return;
             for (const iterator of this.playlist.trackIds) {
-                arr.push(iterator.id)
+                arr.push(iterator.id || iterator)
             }
             return arr
         }
     },
     methods: {
         getPlaylistDetail(){
-            playlistDetail({
-                id: this.$route.query.id
-            }).then(res => {
-                this.playlist = res.playlist
-            })
+            if (this.$route.query.id) {
+                playlistDetail({
+                    id: this.$route.query.id
+                }).then(res => {
+                    this.playlist = res.playlist
+                })
+            } else {
+                getLoveList({
+                    uuid: this.$route.query.uuid
+                }).then(res => {
+                    this.playlist = Object.assign({},res.result.playlist,{
+                        name:'我喜欢的音乐',
+                        creator:{
+                            avatarUrl: res.result.playlist.avatarUrl,
+                            nickname: res.result.playlist.nickname,
+                        },
+                        trackIds: res.result.trackIds,
+                    })
+                    
+                })
+            }
+            
         }
     },
 }

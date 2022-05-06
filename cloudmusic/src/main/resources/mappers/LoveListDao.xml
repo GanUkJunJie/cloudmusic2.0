@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace='com.example.cloudmusic.dao.LoveListDao'>
+	<resultMap id="BaseResultMap" type="com.example.cloudmusic.entity.LoveList">
+		<id column="uuid" jdbcType="VARCHAR" property="uuid" />
+		<result column="coverImgUrl" jdbcType="VARCHAR" property="coverImgUrl" />
+		<result column="avatarUrl" jdbcType="VARCHAR" property="avatarUrl" />
+		<result column="nickname" jdbcType="VARCHAR" property="nickname" />
+		<result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="subscribedCount" jdbcType="VARCHAR" property="subscribedCount" />
+		<result column="shareCount" jdbcType="VARCHAR" property="shareCount" />
+		<result column="trackCount" jdbcType="VARCHAR" property="trackCount" />
+		<result column="playCount" jdbcType="TIMESTAMP" property="playCount" />
+	</resultMap>
+
+	<!-- 获取用户基本信息 -->
+	<select id="getLoveList" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select uuid,coverImgUrl,avatarUrl,nickname,createTime,subscribedCount,
+		 shareCount,trackCount,playCount from lovelist where uuid = #{uuid}
+	</select>
+
+	<select id="getCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+		select count(*) from likesong where uuid = #{uuid}
+	</select>
+
+	<!-- 添加用户喜欢列表 -->
+	<insert id="addLoveList" parameterType="com.example.cloudmusic.entity.LoveList">
+        insert into lovelist (uuid,coverImgUrl,avatarUrl,nickname,createTime,
+        subscribedCount,shareCount,trackCount,playCount) value(#{uuid}, #{coverImgUrl}, #{avatarUrl}, #{nickname},
+        #{createTime}, #{subscribedCount}, #{shareCount}, #{trackCount}, #{playCount})
+	</insert>
+</mapper>
