@@ -1,7 +1,5 @@
 import routerFun from './router-map';
 
-var routerMap = routerFun();
-
 function sortRouterMap(router,data){
     const currentRouter = []
     if (!router || !data) return currentRouter
@@ -10,9 +8,9 @@ function sortRouterMap(router,data){
             if (routerItem.path === dataItem.menuCode) {
                 if (!routerItem.meta.navInside) {
                     // 千万不要修改 routerItem 会覆盖 routerMap 导致无法监听正确数据变化
-                    const item = JSON.parse(JSON.stringify(routerItem))
-                    item.children = sortRouterMap(routerItem.children,dataItem.subMenu)
-                    return currentRouter.push(item)
+                    // const item = JSON.parse(JSON.stringify(routerItem))
+                    routerItem.children = sortRouterMap(routerItem.children,dataItem.subMenu)
+                    // return currentRouter.push(item)
                 }
                 return currentRouter.push(routerItem)
             }
@@ -21,6 +19,7 @@ function sortRouterMap(router,data){
     return currentRouter
 }
 function createRouterMap(data) {
+    let routerMap = routerFun();
     return sortRouterMap(routerMap,data)
 }
 

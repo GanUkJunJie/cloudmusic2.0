@@ -10,7 +10,6 @@ const mutations = {
         state.user = data;
     },
     SET_MENU: (state,data) => {
-        // console.log('###',data);
         state.menu = data;
     }
 }
