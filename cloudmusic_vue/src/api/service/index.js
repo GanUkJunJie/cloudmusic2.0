@@ -2,6 +2,11 @@ import { postService } from '@/utils/service';
 
 const showErrMsg = { showErrMsg: true }
 
+//菜单
+export function queryMenu(data){
+    return postService('/menu/getMenu', data, showErrMsg)
+}
+
 //注册
 export function register(data){
     return postService('/user/register', data, showErrMsg)

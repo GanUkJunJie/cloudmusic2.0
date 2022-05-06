@@ -1,5 +1,5 @@
 import createRouterMap from '@/router/generate-routes';
-import { userBase } from '@/api/service';
+import { queryMenu, userBase } from '@/api/service';
 const state = {
     user: {},
     menu: [],
@@ -10,12 +10,13 @@ const mutations = {
         state.user = data;
     },
     SET_MENU: (state,data) => {
+        // console.log('###',data);
         state.menu = data;
     }
 }
 
 const actions = {
-    getInfo({ commit, state}) {
+    async getInfo({ commit, state}) {
         const uuid =  window.sessionStorage.getItem("uuid")
         if (uuid) {
             userBase({
@@ -24,8 +25,8 @@ const actions = {
                 commit('SET_USER',res.result)
             })
         }
-        var routerList = []
-        routerList = createRouterMap([])
+        let routerList = (await queryMenu({uuid: uuid})).result
+        routerList = createRouterMap(routerList)
         commit('SET_MENU',routerList)
     }
 }
