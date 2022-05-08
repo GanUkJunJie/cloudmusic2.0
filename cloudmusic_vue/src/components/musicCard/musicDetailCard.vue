@@ -88,6 +88,7 @@ export default {
             songLyrics({
                 id: id
             }).then(res => {
+                console.log(id,res.lrc.lyric);
                 this.dealLyrics(res && res.lrc && res.lrc.lyric)
             })
         },

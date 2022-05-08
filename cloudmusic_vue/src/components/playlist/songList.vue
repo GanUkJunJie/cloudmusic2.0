@@ -145,6 +145,7 @@ export default {
             songDetail({
                 ids: this.trackIds.slice(0, this.songCount).toString(),
             }).then(res => {
+                console.log(res.songs);
                 this.tableData = res.songs
             })
         },

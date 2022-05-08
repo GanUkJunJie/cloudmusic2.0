@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace='com.example.cloudmusic.dao.SongDao'>
+	<resultMap id="BaseResultMap" type="com.example.cloudmusic.entity.Song">
+		<id column="id" jdbcType="VARCHAR" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="dt" jdbcType="BIGINT" property="dt" />
+	</resultMap>
+
+	<!-- 获取歌曲信息 -->
+	<select id="getSong" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select id,name,dt from song where id = #{id}
+	</select>
+
+	<!-- 添加 -->
+	<insert id="addSong" parameterType="com.example.cloudmusic.entity.Song">
+        insert into song (id,name,dt) value(#{id}, #{name}, #{dt} )
+	</insert>
+
+</mapper>
