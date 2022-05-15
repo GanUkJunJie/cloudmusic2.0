@@ -28,6 +28,11 @@ export const constantRoutes = [
                 meta: {
                     title: '歌单详情',
                 },
+                props(route){
+                    return {
+                        id: route.query.id
+                    }
+                }
             },
             {
                 name: 'artistDetail',

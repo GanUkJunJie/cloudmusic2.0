@@ -12,12 +12,14 @@
                     :icon = "item.meta.icon"
                     :title = "item.meta.title"/>
             </template>
-            <sidebar-item
-                v-for="child in item.children"
-                :key="child.path"
-                :item="child"
-                :basePath="item.path"
-            />
+            <div v-if="login">
+                <sidebar-item
+                    v-for="child in item.children"
+                    :key="child.path"
+                    :item="child"
+                    :basePath="item.path"
+                />
+            </div>
         </el-submenu>
 
         <!-- 一级导航 -->
@@ -49,6 +51,9 @@ export default {
         hasChildren(){
             return this.item.meta.hasChildren
         },
+        login(){
+            return this.$store.getters.user.uuid
+        }
     },
     methods: {
         resolvePath(routePath){

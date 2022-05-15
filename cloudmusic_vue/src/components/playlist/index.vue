@@ -14,6 +14,9 @@ import Tabs from './tabs';
 import { playlistDetail } from '@/api/discover-music/playlist';
 import { getLoveList } from '@/api/service';
 export default {
+    props:{
+        id: [Number,String]
+    },
     components: {
         PictureBox,
         Info,
@@ -23,9 +26,6 @@ export default {
         return {
             playlist: {},
         }
-    },
-    mounted() {
-        this.getPlaylistDetail()
     },
     computed: {
         //歌单中歌曲的id
@@ -38,15 +38,29 @@ export default {
             return arr
         }
     },
+    watch:{
+        id:{
+            handler(val,oldVal){
+                if (val) {
+                    this.getPlaylistDetail(val)
+                }
+            },
+            immediate: true
+        }
+    },
+    mounted() {
+        this.getMyPlaylistDetail()
+    },
     methods: {
-        getPlaylistDetail(){
-            if (this.$route.query.id) {
-                playlistDetail({
-                    id: this.$route.query.id
-                }).then(res => {
-                    this.playlist = res.playlist
-                })
-            } else {
+        getPlaylistDetail(id){
+            playlistDetail({
+                id: id
+            }).then(res => {
+                this.playlist = res.playlist
+            })
+        },
+        getMyPlaylistDetail(){
+            if (this.$route.query.uuid) {
                 getLoveList({
                     uuid: this.$route.query.uuid
                 }).then(res => {
@@ -59,9 +73,8 @@ export default {
                         trackIds: res.result.trackIds,
                     })
                     
-                })
+            })
             }
-            
         }
     },
 }

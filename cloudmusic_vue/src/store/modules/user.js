@@ -1,5 +1,6 @@
 import createRouterMap from '@/router/generate-routes';
 import { queryMenu, userBase } from '@/api/service';
+import { createList } from '@/api/create-playlist';
 const state = {
     user: {},
     menu: [],
@@ -25,7 +26,8 @@ const actions = {
             })
         }
         let routerList = (await queryMenu({uuid: uuid})).result
-        routerList = createRouterMap(routerList)
+        let create = (await createList()).playlist
+        routerList = createRouterMap(routerList,create)
         commit('SET_MENU',routerList)
     }
 }

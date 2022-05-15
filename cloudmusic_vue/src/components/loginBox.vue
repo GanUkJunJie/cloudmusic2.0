@@ -70,7 +70,7 @@ export default {
                 this.$store.dispatch('user/getInfo')
                 this.$message({message: res.message,type: 'success'});
                 this.$emit('changeLogin', false);
-                location.reload();
+                // location.reload();
             })
         },
         async register(){
